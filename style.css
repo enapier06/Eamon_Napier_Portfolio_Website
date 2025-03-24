@@ -3,9 +3,11 @@
 :root {
   --bg-body: hsl(0, 0%, 8%);
   --bg-body2: hsl(0, 0%, 14%);
-  --accent: hsl(153, 71%, 59%);
+  --accent1: hsl(134, 61%, 45%);
+  --accent2: hsl(201, 100%, 35%);
   --text1: hsl(0, 0%, 100%);
   --text2: hsl(0, 0%, 85%);
+  --underline-name: hsl(201, 100%, 35%);
   --invalid: hsl(7, 100%, 68%);
   --fs-18: 1.125rem;
   --fs-88: 5.5rem;
@@ -73,6 +75,40 @@ h3 {
   font-size: clamp(2.5rem, 0.7rem + 7.68vw, 5.5rem);
   letter-spacing: -0.028em;
   line-height: 1.1;
+}
+
+.header-lg {
+  font-size: clamp(2rem, 0.5rem + 4vw, 3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.name_span {
+  position: relative;
+  display: inline-block; /* ensures proper positioning */
+  /* Remove any default underline if present */
+  text-decoration: none;
+}
+
+.name_span {
+  text-decoration: none;
+}
+
+.name_span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: 5px; /* thickness of the underline */
+  background-color: var(--underline-name); /* using your defined color */
+  transition: transform 250ms ease-in-out;
+}
+
+.name_span:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 p {
@@ -143,6 +179,17 @@ svg {
   margin-inline: auto;
 }
 
+.skills__title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust spacing as needed */
+}
+
+.skills__icon {
+  width: 56px;  /* Set appropriate dimensions */
+  height: 56px;
+}
+
 /* 600px */
 @media (min-width: 37.5em) {
   .wrapper {
@@ -185,8 +232,12 @@ svg {
   transition: fill var(--transition);
 }
 
-.header__social:hover > svg > path {
-  fill: var(--accent);
+.header__social.github:hover > svg > path {
+  fill: var(--accent1);
+}
+
+.header__social.linkedin:hover > svg > path {
+  fill: var(--accent2)
 }
 
 @media (min-width: 37.5em) {
@@ -226,12 +277,15 @@ svg {
 }
 
 .hero__image {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  translate: -50%;
-  width: 174px;
+  position: relative;
+  width: 42vw;
+  max-width: 445px;
   height: auto;
+  left: auto;
+  right: 0;
+  translate: 0;
+  align-self: center;
+  margin-block-start: -100px !important;
 }
 
 .hero__rings {
@@ -337,6 +391,9 @@ h1 > span {
 
   .hero__headline {
     margin-block-end: 60px;
+    position: relative;
+    left: -1000px;
+    transition: left 1.5s ease;
   }
 
   .hero__headline > br {
@@ -423,7 +480,9 @@ h1 > span {
   font-size: clamp(2rem, 0.33rem + 7.11vw, 3rem);
   line-height: 1.17;
   margin-block-end: 2px;
+  position: relative;
 }
+
 
 .skills__description {
   margin-block-end: 0;
@@ -465,6 +524,7 @@ h1 > span {
     left: 100%;
   }
 }
+
 
 /* PROJECTS */
 
